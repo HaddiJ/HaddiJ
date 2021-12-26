@@ -1,0 +1,66 @@
+#include <iostream>
+bool chek(int* arr, int size)
+{
+    int prev = arr[0];
+    for (int i = 1, countMin = 0, countMax = 0; i < size; i++)
+    {
+        if (prev > arr[i])
+        {
+            countMin++;
+            countMax = 0;
+        }
+        if (prev < arr[i])
+        {
+            countMax++;
+            countMin = 0;
+        }
+        if (prev == arr[i])
+        {
+            countMax++;
+            countMin++;
+        }
+
+        prev = arr[i];
+
+        if (countMax >= 5 || countMin >= 5)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+int* CreateIntArray(size_t size)
+{
+    if (size <= 0)
+    {
+        return NULL;
+    }
+
+    int* arr = new int[size];
+
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = rand();
+    }
+    return arr;
+}
+
+void PrintArray(int* arr, size_t size)
+{
+    for (int i = 0; i < size; i++)
+        std::cout << arr[i] << "\n";
+}
+
+int main()
+{
+    int size;
+    std::cin >> size;
+    srand(time(NULL));
+    int* arr = CreateIntArray(size);
+    PrintArray(arr, size);
+    std::cout << "\n";
+    bool chekn = chek(arr, size);
+    std::cout << "chek = " << chekn;
+}
