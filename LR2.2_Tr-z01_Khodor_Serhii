@@ -1,0 +1,73 @@
+#include <iostream>
+#include <locale>
+#include "windows.h"
+#include <stack>
+using namespace std;
+
+
+int FindMin(stack<int> st)
+{
+	int min = st.top();
+	int size = st.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (min > st.top())
+			min = st.top();
+		st.pop();
+
+	}
+	return min;
+
+}
+
+int FindMax(stack<int> st)
+{
+	int max = st.top();
+	int size = st.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (max < st.top())
+			max = st.top();
+		st.pop();
+	}
+	return max;
+
+}
+
+bool NumIsNatural(int a)
+{
+	if (a < 0)
+		return false;
+	else
+		return true;
+}
+
+int main() {
+	setlocale(LC_CTYPE, "ukr");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	stack <int> steck;
+
+	int i = 0;
+
+	cout << "Введіть десять натуральних чисел: " << endl;
+	while (i < 10)
+	{
+		int a;
+		cout << "X = ";
+		cin >> a;
+
+		if (NumIsNatural(a))
+			cout << "X - це натуральне число" << endl;
+		else
+			cout << "X - не натуральне число" << endl;
+		steck.push(a);
+		i++;
+	}
+
+	if (steck.empty()) cout << "Стек не пустий";
+	cout << "\n Середнє геометричне = " << sqrt(FindMax(steck) * FindMin(steck));
+	system("pause");
+	return 0;
+}
