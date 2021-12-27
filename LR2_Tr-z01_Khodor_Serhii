@@ -1,0 +1,39 @@
+#include <iostream>
+#include <math.h>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+	srand((int)time(0));
+	int n;
+	cout << "Введiть кiлькiсть елементiв: ";
+	cin >> n;
+	cout << "\n";
+	int* array = new int[n];
+	for (int i = 0; i < n - 1; i++)
+	{
+		array[i] = 2 - rand() % 5;
+		cout << array[i] << " ";
+	}
+	cout << endl;
+	cout << "\n";
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (array[i] == 0)
+		{
+
+			for (int k = i; k < n - 1; k++) {
+				if (array[i + 1] == 0) {
+					i++;
+				}
+				array[k] = array[k + 1];
+			}
+			n--;
+		}
+		cout << array[i] << " ";
+	}
+	cout << "\n";
+}
